@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const ServiceComponent = () => {
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -22,7 +23,6 @@ const ServiceComponent = () => {
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching products:", error);
         setError(error.message);
         setLoading(false);
       });
@@ -32,11 +32,23 @@ const ServiceComponent = () => {
     fetchProducts();
   }, []);
 
-  return (
-    <div className="mt-20  min-h-screen bg-gray-100 dark:bg-gray-900 p-10">
-      <h1 className="text-3xl font-bold text-center text-indigo-600 mb-6">Our Products</h1>
+  const handleCart = (id) => {
+    if (cart.includes(id)) {
+      setCart(cart.filter((item) => item !== id)); // Remove from cart
+    } else {
+      setCart([...cart, id]); // Add to cart
+    }
+  };
 
-      {loading && <p className="text-center text-gray-500">Loading products...</p>}
+  return (
+    <div className="mt-20 min-h-screen bg-gray-100 dark:bg-gray-900 p-10">
+      <h1 className="text-3xl font-bold text-center text-indigo-600 mb-6">
+        Our Products
+      </h1>
+
+      {loading && (
+        <p className="text-center text-gray-500">Loading products...</p>
+      )}
       {error && (
         <div className="text-center text-red-500">
           <p>Error: {error}</p>
@@ -52,18 +64,31 @@ const ServiceComponent = () => {
       {!loading && !error && (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.map((product) => (
-            <article key={product.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+            <article
+              key={product.id}
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden"
+            >
               <Link to={`/service/${product.id}`}>
                 <div>
-                  <img className="object-cover h-64 w-full" src={product.image} alt={product.title} />
+                  <img
+                    className="object-cover h-64 w-full"
+                    src={product.image}
+                    alt={product.title}
+                  />
                 </div>
               </Link>
               <div className="p-4">
                 <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-50">
-                  {product.title.length > 20 ? product.title.substring(0, 20) + "..." : product.title}
+                  {product.title.length > 20
+                    ? product.title.substring(0, 20) + "..."
+                    : product.title}
                 </h2>
-                <span className="text-sm text-gray-600 dark:text-gray-400">{product.category}</span>
-                <span className="block font-bold text-indigo-600 mt-2">${product.price}</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  {product.category}
+                </span>
+                <span className="block font-bold text-indigo-600 mt-2">
+                  ${product.price}
+                </span>
                 <div className="flex items-center mt-2">
                   <span className="text-yellow-400 text-lg">
                     {"★".repeat(Math.round(product.rating?.rate || 0))}
@@ -73,8 +98,15 @@ const ServiceComponent = () => {
                     ({product.rating?.count || 0} reviews)
                   </span>
                 </div>
-                <button className="w-full mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded transition duration-200">
-                  Add to Cart
+                <button
+                  onClick={() => handleCart(product.id)}
+                  className={`w-full mt-4 text-white font-bold py-2 px-4 rounded transition duration-200 ${
+                    cart.includes(product.id)
+                      ? "bg-red-500 hover:bg-red-600"
+                      : "bg-indigo-600 hover:bg-indigo-700"
+                  }`}
+                >
+                  {cart.includes(product.id) ? "Cancel" : "Add to Cart"}
                 </button>
               </div>
             </article>

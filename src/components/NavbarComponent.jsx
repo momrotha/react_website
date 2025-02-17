@@ -6,9 +6,9 @@ import { Navbar } from "flowbite-react";
 export function NavbarComponent() {
   return (
     <Navbar fluid rounded className="bg-pink-200 fixed top-0 left-0 w-full z-50">
-      <Navbar.Brand  href="/src/assets/react.svg">
-        <img src="/src/assets/logo.png" className="rounded-full h-16 w-16 border-2 border-blue-500 bg-white p-1" alt="Flowbite React Logo" />
-        <img src="/src/assets/namelogo.png" className=" h-16 w-32" alt="Flowbite React Logoname" />
+      <Navbar.Brand  href="/assets/react.svg">
+        <img src="vite.svg" className="rounded-full h-16 w-16 border-2 border-blue-500 bg-white p-1" alt="Flowbite React Logo" />
+        <img src="/assets/namelogo.png" className=" h-16 w-32" alt="Flowbite React Logoname" />
         {/* <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Flowbite React</span> */}
       </Navbar.Brand>
       <Navbar.Toggle />

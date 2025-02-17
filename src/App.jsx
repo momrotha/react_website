@@ -20,6 +20,7 @@ function App() {
     <Router>
       <MainComponet/>
       <Routes>
+      <Route path="/" element={<HomePageComponent/>} />
         <Route path="/home" element={<HomePageComponent/>} />
         <Route path="/about" element={<AboutusComponent/>} />
         <Route path="/service" element={<ServiceComponent/>} />

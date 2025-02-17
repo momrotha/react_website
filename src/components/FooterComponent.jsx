@@ -9,8 +9,8 @@ export function FooterComponent() {
       <div className="w-full">
         <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
           <div>
-          <img src="/src/assets/logo.png" className="rounded-full h-16 w-16 border-2 border-blue-500 bg-white p-1" alt="Flowbite React Logo" />
-          <img src="/src/assets/namelogo.png" className=" h-16 w-32" alt="Flowbite React Logoname" />
+          <img src="logo.png" className="rounded-full h-16 w-16 border-2 border-blue-500 bg-white p-1" alt="Flowbite React Logo" />
+          <img src="namelogo.png" className=" h-16 w-32" alt="Flowbite React Logoname" />
           </div>
           <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
             <div>
